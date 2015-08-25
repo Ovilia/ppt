@@ -15,12 +15,12 @@
 
                 // Optional reveal.js plugins
                 dependencies: [
-                    { src: '{{ site.url }}lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '{{ site.url }}plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '{{ site.url }}plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '{{ site.url }}plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '{{ site.url }}plugin/zoom-js/zoom.js', async: true },
-                    { src: '{{ site.url }}plugin/notes/notes.js', async: true }
+                    { src: '{{ site.url }}/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '{{ site.url }}/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '{{ site.url }}/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '{{ site.url }}/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '{{ site.url }}/plugin/zoom-js/zoom.js', async: true },
+                    { src: '{{ site.url }}/plugin/notes/notes.js', async: true }
                 ]
             });
 
