@@ -1,0 +1,12 @@
+name: "Slides of Wenli Zhang"
+
+url: "http://zhangwenli.com/slides"
+
+timezone: Asia/Shanghai
+
+paginate: 50
+
+highlighter: pygments
+
+markdown: rdiscount
+permalink: pretty
