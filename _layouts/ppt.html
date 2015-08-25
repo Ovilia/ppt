@@ -1,5 +1,5 @@
 {% include head.html %}
 
-{{ content }}
+{{ content | replace: '<p><section></p>', '<section>' | replace: '<p></section></p>', '</section>' }}
 
 {% include foot.html %}
