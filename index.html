@@ -2,8 +2,20 @@
 layout: ppt
 ---
 
-	{% for post in site.posts %}
+<section>
 
-	{{ post.title }}
+<h2>羡辙的分享幻灯片</h2>
 
-	{% endfor %}
+<ul>
+{% for post in site.posts %}
+
+<li>
+<a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+</li>
+
+{% endfor %}
+</ul>
+
+<p><small><a href="http://zhangwenli.com">羡辙的主页</a></small></p>
+
+</section>

@@ -417,3 +417,45 @@ new THREE.ShaderMaterial({
 </section>
 
 </section>
+
+
+
+
+
+<section>
+
+<section>
+
+<div class="fragment">
+    <h2>现在，你已经学会了写字</h2>
+</div>
+
+<div class="fragment">
+    <h2>离成为一个作家</h2>
+</div>
+
+<div class="fragment">
+    <h2>只差</h2>
+</div>
+
+<div class="fragment">
+    <h2>一万小时的努力了</h2>
+</div>
+
+</section>
+
+
+
+<section>
+
+## 延伸阅读
+
+- <a href="https://www.opengl.org/wiki/Rendering_Pipeline_Overview" target="_blank">Rendering Pipeline Overview</a>
+- <a href="http://book.douban.com/subject/1392483/" target="_blank">《计算机图形学》</a>
+- <a href="https://developer.nvidia.com/gpugems/GPUGems/gpugems_pref01.html" target="_blank">《GPU Gems》</a>
+- <a href="http://book.douban.com/subject/1312194/" target="_blank">《OpenGL 编程指南》</a>
+- <a href="http://book.douban.com/subject/4186709/" target="_blank">《OpenGL Shading Language》</a>
+
+</section>
+
+</section>
