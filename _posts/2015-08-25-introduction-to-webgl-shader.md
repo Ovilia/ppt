@@ -26,7 +26,7 @@ layout: ppt
 - 着色器是什么
 - 着色器能做什么
 - 着色器长什么样
-- 学写简单的着色器
+- 着色器应用
 
 </section>
 
@@ -230,8 +230,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 大坑！慎入！
 
 <div class="fragment">
-    <h4>类似 C 语言</h4>
-    <p>一开始只当 JavaScript 写，结果 0.0 写成 0 就挂了</p>
+    <h4>OpenGL Shading Language (GLSL)</h4>
+    <p>OpenGL 对应的着色器语言</p>
+</div>
+
+<div class="fragment">
+    <p>类似 C 语言</p>
+    <p>超强类型</p>
+    <p><small>一开始只当 JavaScript 写，结果 0.0 写成 0 就挂了，甚至<code>float a = (float)1;</code>也是不行的</small></p>
 </div>
 
 <div class="fragment">
@@ -259,8 +265,13 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 ## 着色器分类
 
-- 顶点着色器（Vertex Shader）
-- 片段着色器（Fragment Shader）
+### 顶点着色器（Vertex Shader）
+
+对每个面片的顶点运行一次
+
+### 片段着色器（Fragment Shader）
+
+对每个片段（可以简单理解为屏幕像素）运行一次
 
 </section>
 
@@ -268,10 +279,141 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 <section>
 
-## 
+## 存储限定符（Storage Qualifiers）
+
+<small><a href="https://www.khronos.org/files/webgl/webgl-reference-card-1_0.pdf" target="_blank">WebGL 1.0 API Quick Reference Card</a></small>
+
+<div class="fragment">
+    <h3><code>const</code></h3>
+    <p>我们熟悉的常量</p>
+</div>
+
+<div class="fragment">
+    <h3><code>attribute</code></h3>
+    <p>每个顶点对应各自的值</p>
+</div>
+
+<div class="fragment">
+    <h3><code>uniform</code></h3>
+    <p>所有顶点共用同一个值</p>
+</div>
+
+<div class="fragment">
+    <h3><code>varying</code></h3>
+    <p>把数据从顶点着色器传到片段着色器</p>
+</div>
 
 </section>
 
 
+
+<section>
+
+## 着色器实例
+
+<a href="http://zhangwenli.com/DepthOfField" target="_blank">景深模糊渲染</a>
+
+<!--iframe src="http://zhangwenli.com/DepthOfField" width="800" height="600"></iframe-->
+
+</section>
+
+
+
+<section>
+
+### 深度着色器
+
+#### 顶点着色器
+
+<pre><code data-trim>
+void main()
+{
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+</code></pre>
+
+#### 片段着色器
+
+<pre><code data-trim>
+uniform float farmostDepth;
+
+void main()
+{
+    float zbuffer = gl_FragCoord.z * gl_FragCoord.w * farmostDepth;
+    gl_FragColor = vec4(zbuffer, zbuffer, zbuffer, 1.0);
+}
+</code></pre>
+
+#### Three.js 中传入参数
+
+<pre><code data-trim>
+new THREE.ShaderMaterial({
+    uniforms: {
+        farmostDepth: {
+            type: 'f',
+            value: 500
+        }
+    },
+    attributes: {},
+    vertexShader: DofDemo.shader.depthVert,
+    fragmentShader: DofDemo.shader.depthFrag,
+    transparent: true
+});
+</code></pre>
+
+<small><a href="https://github.com/Ovilia/DepthOfField" target="_blank">GitHub</a></small>
+
+</section>
+
+
+
+<section>
+
+### 景深模糊着色器
+
+#### 顶点着色器
+
+<pre><code data-trim>
+varying vec2 vUv;
+
+void main()
+{    
+    // passing texture to fragment shader
+    vUv = uv;
+    
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+</code></pre>
+
+#### 片段着色器
+
+<pre><code data-trim>
+varying vec2 vUv;
+uniform sampler2D texture;
+uniform sampler2D depth;
+
+// ...
+
+texture2D(texture, vUv); // get color of current fragment
+</code></pre>
+
+#### Three.js 中传入参数
+
+<pre><code data-trim>
+new THREE.ShaderMaterial({
+    texture: {
+        type: 't',
+        value: DofDemo.rttTexture
+    },
+    depth: {
+        type: 't',
+        value: DofDemo.rttDepth
+    }, // ...
+});
+</code></pre>
+
+<small><a href="https://github.com/Ovilia/DepthOfField" target="_blank">GitHub</a></small>
+
+</section>
 
 </section>
