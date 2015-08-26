@@ -344,6 +344,10 @@ void main()
 }
 </code></pre>
 
+</section>
+
+<section>
+
 #### Three.js 中传入参数
 
 <pre><code data-trim>
@@ -396,6 +400,10 @@ uniform sampler2D depth;
 
 texture2D(texture, vUv); // get color of current fragment
 </code></pre>
+
+</section>
+
+<section>
 
 #### Three.js 中传入参数
 
