@@ -13,5 +13,7 @@
   border-left-width: 5px;
   padding: 0.2rem 1.5rem;
   text-align: left; }
+.reveal .fragment {
+  margin: 0.5rem; }
 
 /*# sourceMappingURL=app.css.map */
