@@ -1,0 +1,25 @@
+{
+  "name": "OviliaPPT",
+  "version": "0.1.0",
+  "description": "Ovilia's PPT",
+  "main": "gulpfile.js",
+  "author": "Ovilia",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.9.0",
+    "gulp-sass": "~2.0.4",
+    "gulp-autoprefixer": "~3.0.0",
+    "gulp-uglify": "~1.4.1",
+    "gulp-rename": "~1.2.2",
+    "gulp-jekyll": "~0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ovilia/ppt"
+  },
+  "keywords": [
+    "jekyll",
+    "gulp",
+    "sass"
+  ]
+}
