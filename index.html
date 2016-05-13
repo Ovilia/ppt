@@ -1,21 +1,19 @@
 ---
-layout: ppt
+layout: normal
 ---
 
 <section>
 
-<h2>羡辙的分享幻灯片</h2>
+<h2><a href="http://zhangwenli.com" target="_blank">羡辙</a>的分享幻灯片</h2>
 
 <ul>
 {% for post in site.posts %}
 
 <li>
-<a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+{{ post.sharedate }}: <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
 </li>
 
 {% endfor %}
 </ul>
-
-<p><small><a href="http://zhangwenli.com">羡辙的主页</a></small></p>
 
 </section>

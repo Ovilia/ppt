@@ -1,0 +1,79 @@
+.reveal {
+  color: $clr-text;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $clr-head;
+    text-transform: none;
+  }
+
+  h1 {
+    color: $clr-primary;
+  }
+
+  a {
+    color: $clr-secondary;
+    text-decoration: none;
+  }
+
+  blockquote {
+    box-shadow: none;
+    border-style: solid;
+    border-color: $clr-primary;
+    border-left-width: 5px;
+    padding: 0.2rem 1.5rem;
+    text-align: left;
+  }
+
+  .fragment {
+    margin: 0.5rem;
+  }
+
+  div {
+    font-size: 1.8rem;
+  }
+
+  section {
+    text-align: left;
+
+    h2 {
+      border-left: 10px solid;
+      font-size: 5rem;
+      padding-left: 40px;
+      color: $clr-primary;
+      margin-bottom: 1.5rem;
+
+      a {
+        color: $clr-secondary;
+      }
+    }
+  }
+
+  .home-section {
+    text-align: center;
+    padding: 260px 0 !important;
+
+    h2 {
+      font-size: 2.8rem;
+      border-left: none;
+      padding-left: 0;
+      color: $clr-head;
+    }
+  }
+
+  .home-author {
+    .author {
+      font-size: 2.8rem;
+      margin-top: 3rem;
+    }
+
+    .from {
+      margin: 0.5rem 0 0.25rem 0;
+    }
+  }
+}
+
+.fullpage {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

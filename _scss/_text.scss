@@ -1,72 +1,33 @@
 body {
   background-color: $clr-bg;
-}
-
-
-
-.fullpage {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-
-
-.reveal {
   color: $clr-text;
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    color: $clr-head;
-    text-transform: none;
-  }
+.container {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  h1 {
-    color: $clr-secondary;
-  }
 
+
+h1, h2, h3, h4, h5, h6 {
+  color: $clr-head;
+  text-transform: none;
+}
+
+h1 {
+  color: $clr-primary;
+}
+
+h2 {
   a {
     color: $clr-primary;
   }
-
-  blockquote {
-    box-shadow: none;
-    border-style: solid;
-    border-color: $clr-primary;
-    border-left-width: 5px;
-    padding: 0.2rem 1.5rem;
-    text-align: left;
-  }
-
-  .fragment {
-    margin: 0.5rem;
-  }
-
-  div {
-    font-size: 1.8rem;
-  }
 }
 
-
-
-section {
-  text-align: left;
-}
-
-.home-section {
-  h1 {
-    font-size: 5rem;
-    border-left: 10px solid;
-    padding-left: 40px;
-  }
-}
-
-.home-author {
-  .author {
-    font-size: 2.8rem;
-    margin-top: 15rem;
-  }
-
-  .from {
-    margin: 1rem 0 0.25rem 0;
-  }
+a {
+  color: $clr-secondary;
+  text-decoration: none;
 }
