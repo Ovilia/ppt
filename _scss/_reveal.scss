@@ -13,15 +13,29 @@
   a {
     color: $clr-secondary;
     text-decoration: none;
+    border-bottom: 1px dashed;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: $clr-secondary;
+      border-bottom: 1px dashed $clr-bg;
+      color: $clr-bg;
+    }
   }
 
   blockquote {
     box-shadow: none;
     border-style: solid;
-    border-color: $clr-primary;
+    border-color: $clr-thirdary;
     border-left-width: 5px;
-    padding: 0.2rem 1.5rem;
+    padding: 0.8rem 1.6rem;
     text-align: left;
+    width: auto;
+    font-size: 0.8em;
+
+    p {
+      margin: 10px 0;
+    }
   }
 
   .fragment {
@@ -29,7 +43,7 @@
   }
 
   div {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   section {
@@ -37,14 +51,18 @@
 
     h2 {
       border-left: 10px solid;
-      font-size: 5rem;
+      font-size: 4rem;
       padding-left: 40px;
       color: $clr-primary;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
 
       a {
         color: $clr-secondary;
       }
+    }
+
+    h3 {
+      margin-top: 1.8rem;
     }
   }
 
@@ -69,6 +87,11 @@
     .from {
       margin: 0.5rem 0 0.25rem 0;
     }
+  }
+
+  .fragment {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
