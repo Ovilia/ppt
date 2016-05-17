@@ -46,6 +46,17 @@
     font-size: 2rem;
   }
 
+  tr {
+    border-image: none;
+    & + tr {
+      border-top: $clr-bg-light 1px solid;
+    }
+  }
+
+  table td {
+    border-bottom: none;
+  }
+
   section {
     text-align: left;
 
@@ -63,6 +74,10 @@
 
     h3 {
       margin-top: 1.8rem;
+    }
+
+    img {
+      border: 1px dashed $clr-secondary;
     }
   }
 
