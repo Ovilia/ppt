@@ -92,14 +92,13 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 ### [QUnit](http://qunitjs.com)
 
 <div class="fragment fade-in" markdown="1">
-- 老牌的单元测试框架，发布于 2008 年
+- 老牌的单元测试框架
 - jQuery 家族钦定测试框架
 </div>
 
 ### [Jasmine](http://jasmine.github.io)
 
 <div class="fragment fade-in" markdown="1">
-- 发布于 2010 年
 - *行为驱动*（*Behavior-Driven*）的测试框架
 - 引入*测试套件*（*Test Suite*）概念
 - 语法更自然
@@ -109,7 +108,6 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 ### [Mocha](https://mochajs.org/)
 
 <div class="fragment fade-in" markdown="1">
-- 发布于 2012 年
 - 和 Jasmine 相似度极高
 - 支持更多插件，如*断言*（*Assertion*）库 [Chai](http://chaijs.com/)
 </div>
@@ -189,7 +187,7 @@ describe("pow", function(){
 
 ~~~
 module.exports = {
-  'Demo test Google' : function (client) {
+  'Demo test Google': function (client) {
     client
       .url('http://www.google.com')
       .waitForElementVisible('body', 1000)
@@ -208,14 +206,103 @@ module.exports = {
 
 </section>
 
+
+
+<section markdown="1">
+## 如何自动化测试**渲染**相关部分？
+
+<div class="fragment fade-in" markdown="1">
+### HTML、SVG
+
+可使用 Nightwatch.js 这类库测试 DOM 结构
+</div>
+
+<div class="fragment fade-in" markdown="1">
+### Canvas
+</div>
+
+<ul>
+  <li class="fragment fade-in">渲染出结果，靠人眼看
+    <ul>
+      <li class="fragment fade-in">重复工作量大</li>
+      <li class="fragment fade-in">人眼无法识别细微差别</li>
+    </ul>
+  </li>
+  <li class="fragment fade-in"><code>toDataURL()</code> 保存成图片
+    <ul>
+      <li class="fragment fade-in">比较图片相同？</li>
+      <li class="fragment fade-in">如何描述期望？</li>
+      <li class="fragment fade-in">如何尽可能自动化测试？</li>
+    </ul>
+  </li>
+</ul>
+
+</section>
+
+</section>
+
+
+
+<section>
+
+<section markdown="1">
+## [ECharts](http://echarts.baidu.com/)
+
+- 一个纯 Javascript 的图表库
+- 兼容主流浏览器，移动友好
+- 底层依赖轻量级的 Canvas 类库 [ZRender](https://github.com/ecomfe/zrender)
+- 提供直观、生动、可交互，可高度个性化定制的**数据可视化图表**
+
+<div id="echarts-intro" class="echarts"></div>
+
+
+
 </section>
 
 
 
 <section markdown="1">
 
-## ECharts
+## 对 ECharts 做测试
 
+### 渲染无关部分
+
+**Jasmine 单元测试**
+
+例：链表类 `List`
+
+~~~
+describe('List', function () {
+    var testCase = window.utHelper.prepare(['echarts/data/List']);
+
+    describe('Data Manipulation', function () {
+        testCase('initData 1d', function (List) {
+            var list = new List(['x', 'y']);
+            list.initData([10, 20, 30]);
+            expect(list.get('x', 0)).toEqual(10);
+            expect(list.get('x', 1)).toEqual(20);
+            expect(list.get('x', 2)).toEqual(30);
+            expect(list.get('y', 1)).toEqual(20);
+        });
+
+        // ...
+    });
+});
+~~~
+
+</section>
+
+
+
+<section markdown="1">
+
+## 对 ECharts 做测试
+
+### 渲染相关部分
+
+
+
+</section>
 
 </section>
 
@@ -233,3 +320,87 @@ module.exports = {
 - [Jasmine vs. Mocha](http://marcofranssen.nl/jasmine-vs-mocha/)
 
 </section>
+
+
+
+
+
+<script type="text/javascript" src="{{ site.url }}/js/echarts.min.js"></script>
+
+<script type="text/javaScript">
+
+window.onload = function() {
+
+    var introChart = echarts.init(document.getElementById('echarts-intro'));
+
+    var xAxisData = [];
+    var data = [];
+    for (var i = 0; i < 50; i++) {
+        xAxisData.push(i);
+        data.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5)
+    }
+
+    introChart.setOption({
+        backgroundColor: '#08263a',
+        xAxis: {
+            show: false,
+            data: xAxisData
+        },
+        visualMap: {
+            show: false,
+            min: 0,
+            max: 50,
+            dimension: 0,
+            inRange: {
+                color: ['#41D9C5', '#CDFF5D', '#FF8BBA']
+            }
+        },
+        grid: {
+          left: 50,
+          right: 30,
+          top: 30,
+          bottom: 30
+        },
+        yAxis: {
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#4a657a'
+                }  
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#08263f'
+                }
+            },
+            axisTick: {
+                show: false
+            }
+        },
+        series: [{
+            type: 'bar',
+            data: data,
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 5,
+                    shadowBlur: 10,
+                    shadowColor: '#111'
+                }
+            },
+            animationEasing: 'elasticOut',
+            animationEasingUpdate: 'elasticOut',
+            animationDelay: function (idx) {
+                return idx * 20;
+            },
+            animationDelayUpdate: function (idx) {
+                return idx * 20;
+            }
+        }]
+    });
+
+};
+
+</script>

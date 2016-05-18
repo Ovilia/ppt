@@ -35,3 +35,24 @@ a {
 strong {
   color: $clr-thirdary;
 }
+
+.echarts {
+  width: 100%;
+  height: 400px;
+  margin: 20px 0 !important;
+}
+
+
+
+// text highlighting
+.diff .hljs-deletion, .hljs-string, .hljs-tag .hljs-value, .hljs-preprocessor, .hljs-pragma, .sql .hljs-aggregate, .hljs-javadoc, .smalltalk .hljs-class, .smalltalk .hljs-localvars, .smalltalk .hljs-array, .css .hljs-rules .hljs-value, .hljs-attr_selector, .hljs-pseudo, .apache .hljs-cbracket, .tex .hljs-formula, .coffeescript {
+  color: $clr-primary;
+}
+
+.hljs-built_in, .hljs-attribute, .hljs-keyword {
+  color: $clr-secondary;
+}
+
+.hljs-number, .hljs-date {
+  color: $clr-thirdary;
+}

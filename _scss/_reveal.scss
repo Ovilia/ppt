@@ -57,6 +57,22 @@
     border-bottom: none;
   }
 
+  pre code {
+    background: $clr-bg-dark;
+    padding: 5px 8px;
+    box-shadow: none;
+  }
+
+  code {
+    color: $clr-primary;
+    background-color: $clr-bg-dark;
+    padding: 4px 10px;
+  }
+
+  li {
+    margin-bottom: 12px;
+  }
+
   section {
     text-align: left;
 
