@@ -583,16 +583,6 @@ var testCase = {
 
 <section markdown="1">
 
-{% include author.html %}
-
-</section>
-
-
-
-
-
-<section markdown="1">
-
 ## 扩展阅读
 
 - [Which JavaScript Test Library Should You Use? QUnit vs Jasmine vs Mocha](http://www.techtalkdc.com/which-javascript-test-library-should-you-use-qunit-vs-jasmine-vs-mocha/)
@@ -602,6 +592,16 @@ var testCase = {
 - [Jasmine vs. Mocha](http://marcofranssen.nl/jasmine-vs-mocha/)
 
 - [font-style: italic vs oblique in CSS](http://stackoverflow.com/questions/1680624/font-style-italic-vs-oblique-in-css)
+
+</section>
+
+
+
+
+
+<section markdown="1">
+
+{% include author.html %}
 
 </section>
 
