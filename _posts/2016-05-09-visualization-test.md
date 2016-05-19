@@ -26,9 +26,9 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 
 <section markdown="1">
 
-## 羡辙其人
+## 羡辙
 
-<div style="text-align: center;">
+<div class="center">
     <svg id="owl-svg" version="1.1" baseProfile="full" viewBox="0 0 1088 1088" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100px; height: 100px; padding: 20px; border-radius: 25px; background-color: #22C3AA"><g transform="translate(80 32)" fill="white"><path id="owl-body" d="M 0 0 L 0 896 A 128 128 0 0 0 128 1024 L 640 1024 A 64 64 0 0 0 704 960 A 64 64 0 0 0 640 896 L 192 896 A 64 64 0 0 1 128 832 L 128 256 L 768 256 L 768 896 A 128 128 0 0 0 896 1024 A 64 64 0 0 0 960 960 A 64 64 0 0 0 896 896 L 896 768 L 896 0 L 768 128 L 640 128 L 128 128 L 0 0 z "></path><path id="owl-left-eye" d="M 256 288 A 64 64 0 0 0 192 352 A 64 64 0 0 0 256 416 A 128 128 0 0 1 384 544 A 128 128 0 0 1 256 672 A 128 128 0 0 1 128 544 A 64 64 0 0 0 64 480 A 64 64 0 0 0 0 544 A 64 64 0 0 0 0 544 A 256 256 0 0 0 256 800 A 256 256 0 0 0 512 544 A 256 256 0 0 0 256 288 z " class="eye"></path><path id="owl-right-eye" d="M 576 352 A 192 192 0 0 0 384 544 A 192 192 0 0 0 576 736 A 64 64 0 0 0 640 672 A 64 64 0 0 0 576 608 A 64 64 0 0 1 512 544 A 64 64 0 0 1 576 480 A 64 64 0 0 1 640 544 A 64 64 0 0 0 704 608 A 64 64 0 0 0 768 544 A 64 64 0 0 0 767.72656 538.54492 A 192 192 0 0 0 576 352 z " class="eye"></path></g></svg>
     <div><a href="http://zhangwenli.com">zhangwenli.com</a></div>
 </div>
@@ -324,18 +324,18 @@ chart.setOption({
 #### **半自动测试**
 
 <div class="fragment fade-in" markdown="1">
-- 测试不同版本的渲染一致性
-  - 以某次发布版本为基线，手动查看效果
-  - 以后每次发布比较和基线比较 Canvas 是否一致
-</div>
-<div class="fragment fade-in" markdown="1">
 - 测试不同配置项设置下的渲染一致性
   - 期望相同：如设置等于默认值的字体颜色，期望与默认情况相同
   - 期望不同：如改变字体颜色，期望与默认情况不同
 </div>
 <div class="fragment fade-in" markdown="1">
+- 测试不同版本的渲染一致性
+  - 以某次发布版本为基线，手动查看效果
+  - 以后每次发布比较和基线比较 Canvas 是否一致
+</div>
+<div class="fragment fade-in" markdown="1">
 - 对于失败的案例
-  - 使用 [js-imagediff](https://github.com/HumbleSoftware/js-imagediff) 输出 canvas 图像的** diff 图**
+  - 使用 [js-imagediff](https://github.com/HumbleSoftware/js-imagediff) 输出 Canvas 图像的 **diff 图**
   - 比较 Canvas 操作栈
 </div>
 
@@ -360,13 +360,12 @@ Canvas 操作相同，渲染出的图像一定相同，反之则不成立
 
 <div class="fragment fade-in" markdown="1">
 ### 比较 Canvas 内容
-- 操作更简单，不依赖第三方库
-- 测试结论更精确：视觉效果对，才是真的对
+操作更简单，不依赖第三方库
 </div>
 
 <div class="fragment fade-in" markdown="1">
 ### 比较 Canvas 操作
-- 更严格的测试，发现潜在错误
+更严格的测试，发现潜在错误
 </div>
 
 </section>
@@ -375,9 +374,9 @@ Canvas 操作相同，渲染出的图像一定相同，反之则不成立
 
 <section markdown="1">
 
-## 案例
+## 测试用例 (1)
 
-### 测试标题字重设为 `bold` 的表现
+### 测试标题字重默认值是 `normal`
 
 ~~~
 var testCase = {
@@ -387,7 +386,6 @@ var testCase = {
     title: {
       text: 'bold font vs. normal font',
       textStyle: {
-        fontStyle: 'bold'
       }
     }
   },
@@ -406,7 +404,7 @@ var optionCompare = function(isExpectEqual, title, option1, option2) {
   it(title, function(done) {
     require(['newEcharts'], function (ec) {
       var canvas1 = helper.getRenderedCanvas(ec, option1);
-      var canvas2 = helper.getRenderedCanvas(ec, option2));
+      var canvas2 = helper.getRenderedCanvas(ec, option2);
 
       // canvas context and images
       var ctx1 = canvas1.getContext('2d');
@@ -436,18 +434,101 @@ var optionCompare = function(isExpectEqual, title, option1, option2) {
   });
 };
 
-optionCompare(false, testCase.name, testCase.option1, testCase.option2);
+optionCompare(true, testCase.name, testCase.option1, testCase.option2);
+~~~
+</section>
+
+
+
+<section markdown="1">
+## 用例分析 (1)
+
+<div class="fragment fade-in" markdown="1">
+### 比较 Canvas 内容 vs. 操作
+
+测试结果表明：两种配置的 Canvas 内容是一致的，而操作是不一致的。
+</div>
+
+<div class="fragment fade-in" markdown="1">
+分析操作栈发现，在 Canvas 上绘制时使用了 `bolder` 操作，但是由于该字体家族不存在粗体字重，因此实际的显示效果和 `normal` 相同。
+
+因此，这是一个 bug。
+</div>
+
+<div class="fragment fade-in" markdown="1">
+在本案例中，比较 Canvas **操作**得到的结论是**正确**的，比较 Canvas **内容**得到的结论是**漏报**（*false negative*）的。
+</div>
+
+</section>
+
+
+
+<section markdown="1">
+
+## 测试用例 (2)
+
+### 测试标题样式设为 `oblique` 时，没有使用 `italic`<sup>[1]</sup>
+
+~~~
+var testCase = {
+    name: 'should display oblique different from italic',
+    option1: {
+        series: [],
+        title: {
+            text: 'oblique vs. italic',
+            textStyle: {
+                fontStyle: 'oblique'
+            }
+        }
+    },
+    option2: {
+        series: [],
+        title: {
+            text: 'oblique vs. italic',
+            textStyle: {
+                fontStyle: 'italic'
+            }
+        }
+    }
+};
 ~~~
 
-#### 理想期望效果
+<div class="footnote" markdown="1">
+[1] `italic` 表示由设计师手动绘制的斜体字，而 `oblique` 是在显示时，在原字体样式上做斜切处理。事实上，很少有字体同时存在这两种样式，通常都是互相通用的。参见 [font-style: italic vs oblique in CSS](http://stackoverflow.com/questions/1680624/font-style-italic-vs-oblique-in-css)。
+</div>
 
-`title.textStyle.fontWeight` 为 `bold` 时，字重显示为粗体
-
-#### 实际期望效果
-
-`title.textStyle.fontWeight` 为 `bold` 时，渲染结果是否与 `normal` 时不同
+</section>
 
 
+
+<section markdown="1">
+## 用例分析 (2)
+
+### 该案例存在的潜在问题
+
+<div class="fragment fade-in" markdown="1">
+如果我们希望测试标题样式为 `oblique` 时，是否真正设置正确，我们是无从很难判断的。
+
+我们只能判断该样式与 `normal`、`italic` 等的结果不同，从侧面得出结论。
+
+这一点在软件测试中是一个普遍存在的潜在问题。
+</div>
+
+<div class="fragment fade-in" markdown="1">
+### 比较 Canvas 内容 vs. 操作
+
+测试结果表明：两种配置的 Canvas 内容是一致的，而操作是不一致的。
+</div>
+
+<div class="fragment fade-in" markdown="1">
+分析操作栈发现，绘制时的确分别使用了 `oblique` 与 `italic`，但是由于两者显示效果一致，所以产生了以上分歧。
+
+因此，这不是一个 bug。
+</div>
+
+<div class="fragment fade-in" markdown="1">
+在本案例中，比较 Canvas **操作**得到的结论是**正确**的，比较 Canvas **内容**得到的结论是**误报**（*false positive*）的。
+</div>
 
 </section>
 
@@ -457,8 +538,16 @@ optionCompare(false, testCase.name, testCase.option1, testCase.option2);
 
 ## 结论
 
+通常比较 Canvas 操作得到的结论更稳健
+
 <div class="fragment fade-in" markdown="1">
-### 推荐测试方式
+比较操作也不总是符合预期的，取决于测试用例
+
+（思考反例）
+</div>
+
+<div class="fragment fade-in" markdown="1">
+### 推荐的比较方式
 - 先比较 Canvas 操作
 - 如果测试失败
   - 查看 Canvas 图像 diff
@@ -468,6 +557,36 @@ optionCompare(false, testCase.name, testCase.option1, testCase.option2);
 </section>
 
 </section>
+
+
+
+
+
+<section markdown="1">
+
+## 前端可视化的测试实践
+
+<div class="fragment fade-in" markdown="1">
+### 可视化相关测试的思路
+- 渲染无关部分做单元测试
+- 渲染相关部分做 UI 测试
+  - 测试不同配置项设置下的渲染一致性
+  - 测试不同版本的渲染一致性
+  - 查看 Canvas 图像与操作栈 diff 分析失败原因
+</div>
+
+</section>
+
+
+
+
+
+<section markdown="1">
+
+{% include author.html %}
+
+</section>
+
 
 
 
@@ -482,6 +601,8 @@ optionCompare(false, testCase.name, testCase.option1, testCase.option2);
 
 - [Jasmine vs. Mocha](http://marcofranssen.nl/jasmine-vs-mocha/)
 
+- [font-style: italic vs oblique in CSS](http://stackoverflow.com/questions/1680624/font-style-italic-vs-oblique-in-css)
+
 </section>
 
 
@@ -493,7 +614,16 @@ optionCompare(false, testCase.name, testCase.option1, testCase.option2);
 <script type="text/javaScript">
 
 window.onload = function() {
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        if (event.indexh === 3 && event.indexv === 0) {
+            setEChart();
+        }
+    });
 
+};
+
+function setEChart() {
+    console.log(document.getElementById('echarts-intro').clientHeight);
     var introChart = echarts.init(document.getElementById('echarts-intro'));
 
     var xAxisData = [];
@@ -563,7 +693,6 @@ window.onload = function() {
             }
         }]
     });
-
-};
+}
 
 </script>
