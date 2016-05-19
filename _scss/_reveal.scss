@@ -43,7 +43,7 @@
   }
 
   div {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   tr {
@@ -61,6 +61,12 @@
     background: $clr-bg-dark;
     padding: 5px 8px;
     box-shadow: none;
+    max-height: 640px;
+    overflow: hidden;
+
+    &:hover {
+      overflow: auto;
+    }
   }
 
   code {
@@ -94,15 +100,28 @@
 
     img {
       border: 1px dashed $clr-secondary;
+
+      &.float {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      &.with-bg {
+        background-color: white;
+      }
     }
   }
+
+
 
   .home-section {
     text-align: center;
     padding: 260px 0 !important;
 
     h2 {
-      font-size: 2.8rem;
+      font-size: 1.8rem;
+      margin-top: -0.5rem;
       border-left: none;
       padding-left: 0;
       color: $clr-head;
@@ -123,6 +142,12 @@
   .fragment {
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .echarts {
+    width: 100%;
+    height: 400px;
+    margin: 20px 0 !important;
   }
 }
 

@@ -120,20 +120,16 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 
 ## 大同小异的语法
 
-#### jUnit
-
 ~~~
+// jUnit
 test("pow(2, 2) should return 4", function(){
     equal(math.pow(2, 2), 4, "result was " + result);
 });
 test("pow(2, 3) should return 8", function(){
     equal(math.pow(2, 3), 8, "result was " + result);
 });
-~~~
 
-#### Jasmine
-
-~~~
+// Jasmine
 describe("pow", function(){
     it("should raise 2 to the power of 2", function(){
         expect(math.pow(2, 2)).toBe(4);
@@ -142,11 +138,8 @@ describe("pow", function(){
         expect(math.pow(2, 3)).toBe(8);
     });
 });
-~~~
 
-#### Mocha
-
-~~~
+// Mocha
 var expect = require('chai').expect;
 describe("pow", function(){
     it("should raise 2 to the power of 2", function(){
@@ -255,11 +248,13 @@ module.exports = {
 
 <div id="echarts-intro" class="echarts"></div>
 
-
+</section>
 
 </section>
 
 
+
+<section>
 
 <section markdown="1">
 
@@ -296,11 +291,179 @@ describe('List', function () {
 
 <section markdown="1">
 
-## 对 ECharts 做测试
-
 ### 渲染相关部分
 
+例：配置项 `title.text` 允许 `\n` 表示换行
 
+<div class="fragment fade-in" markdown="1">
+#### **手动测试**
+
+- 设置参数
+- 人眼查看渲染效果是否换行
+
+~~~
+chart.setOption({
+    series: [],
+    title: {
+        text: 'first line\nsecond line'
+    }
+});
+~~~
+</div>
+
+<div class="fragment fade-in">
+<img class="with-bg center" src="{{ site.url }}/img/posts/2016-05-09-visualization-test-01.png" />
+</div>
+
+</section>
+
+
+
+<section markdown="1">
+
+#### **半自动测试**
+
+<div class="fragment fade-in" markdown="1">
+- 测试不同版本的渲染一致性
+  - 以某次发布版本为基线，手动查看效果
+  - 以后每次发布比较和基线比较 Canvas 是否一致
+</div>
+<div class="fragment fade-in" markdown="1">
+- 测试不同配置项设置下的渲染一致性
+  - 期望相同：如设置等于默认值的字体颜色，期望与默认情况相同
+  - 期望不同：如改变字体颜色，期望与默认情况不同
+</div>
+<div class="fragment fade-in" markdown="1">
+- 对于失败的案例
+  - 使用 [js-imagediff](https://github.com/HumbleSoftware/js-imagediff) 输出 canvas 图像的** diff 图**
+  - 比较 Canvas 操作栈
+</div>
+
+</section>
+
+
+
+<section markdown="1">
+
+## 如何比较 Canvas
+
+- 使用 `canvas.toDataURL()` 比较 **Canvas 图像**是否一致
+- 使用 [Canteen](https://github.com/platfora/Canteen) 比较 **Canvas 操作**是否一致
+
+<div class="fragment fade-in">
+Canvas 操作相同，渲染出的图像一定相同，反之则不成立
+</div>
+
+<div class="fragment fade-in">
+<p class="center lg-mg"><large>操作一致是图像一致的充分非必要条件</large></p>
+</div>
+
+<div class="fragment fade-in" markdown="1">
+### 比较 Canvas 内容
+- 操作更简单，不依赖第三方库
+- 测试结论更精确：视觉效果对，才是真的对
+</div>
+
+<div class="fragment fade-in" markdown="1">
+### 比较 Canvas 操作
+- 更严格的测试，发现潜在错误
+</div>
+
+</section>
+
+
+
+<section markdown="1">
+
+## 案例
+
+### 测试标题字重设为 `bold` 的表现
+
+~~~
+var testCase = {
+  name: 'should display bold font weight',
+  option1: {
+    series: [],
+    title: {
+      text: 'bold font vs. normal font',
+      textStyle: {
+        fontStyle: 'bold'
+      }
+    }
+  },
+  option2: {
+    series: [],
+    title: {
+      text: 'bold font vs. normal font',
+      textStyle: {
+        fontStyle: 'normal'
+      }
+    }
+  }
+};
+
+var optionCompare = function(isExpectEqual, title, option1, option2) {
+  it(title, function(done) {
+    require(['newEcharts'], function (ec) {
+      var canvas1 = helper.getRenderedCanvas(ec, option1);
+      var canvas2 = helper.getRenderedCanvas(ec, option2));
+
+      // canvas context and images
+      var ctx1 = canvas1.getContext('2d');
+      var ctx2 = canvas2.getContext('2d');
+      var img1 = canvas1.toDataURL();
+      var img2 = canvas2.toDataURL();
+
+      // compare canvas content or operation stack
+      var compare1 = compare2 = null;
+      if (STRATEGY === 'content') {
+        compare1 = img1;
+        compare2 = img2;
+      } else if (STRATEGY === 'stack') {
+        compare1 = ctx1.hash()
+        compare2 = ctx2.hash();
+      }
+
+      // expect to equal, or not
+      if (isExpectEqual) {
+        expect(compare1).toEqual(compare2);
+      } else {
+        expect(compare1).not.toEqual(compare2);
+      }
+
+      done();
+    });
+  });
+};
+
+optionCompare(false, testCase.name, testCase.option1, testCase.option2);
+~~~
+
+#### 理想期望效果
+
+`title.textStyle.fontWeight` 为 `bold` 时，字重显示为粗体
+
+#### 实际期望效果
+
+`title.textStyle.fontWeight` 为 `bold` 时，渲染结果是否与 `normal` 时不同
+
+
+
+</section>
+
+
+
+<section markdown="1">
+
+## 结论
+
+<div class="fragment fade-in" markdown="1">
+### 推荐测试方式
+- 先比较 Canvas 操作
+- 如果测试失败
+  - 查看 Canvas 图像 diff
+  - 查看 Canvas 操作栈 diff
+</div>
 
 </section>
 

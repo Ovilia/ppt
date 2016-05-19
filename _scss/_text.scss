@@ -36,10 +36,27 @@ strong {
   color: $clr-thirdary;
 }
 
-.echarts {
-  width: 100%;
-  height: 400px;
-  margin: 20px 0 !important;
+pre.highlight {
+  font-size: 1.5rem;
+}
+
+large {
+  display: inline-block;
+  padding: 3px 12px;
+  font-size: 1.5em;
+  background-color: $clr-secondary;
+  color: $clr-bg;
+  font-weight: bold;
+}
+
+
+
+.center {
+  text-align: center;
+}
+
+.lg-mg {
+  margin: 40px 0;
 }
 
 
