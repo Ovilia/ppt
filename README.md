@@ -14,4 +14,4 @@ jekyll b
 gulp watch
 ```
 
-其他用法参加 `gulpfile.js`。
+其他用法参见 `gulpfile.js`。
