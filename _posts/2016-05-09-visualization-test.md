@@ -60,6 +60,49 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 
 
 
+
+<section>
+
+<section markdown="1">
+## [ECharts](http://echarts.baidu.com/)
+
+- 一个纯 Javascript 的图表库
+- 兼容主流浏览器，移动友好
+- 底层依赖轻量级的 Canvas 类库 [ZRender](https://github.com/ecomfe/zrender)
+- 提供直观、生动、可交互，可高度个性化定制的**数据可视化图表**
+
+<div id="echarts-intro" class="echarts"></div>
+
+</section>
+
+
+
+<section markdown="1">
+
+## 为 ECharts 做测试
+
+### 测试渲染相关部分的目标
+
+<div class="fragment fade-in" markdown="1">
+- 像素级精确测试渲染结果
+</div>
+<div class="fragment fade-in" markdown="1">
+- 尽可能自动化测试
+</div>
+
+<div class="center">
+<large class="fragment fade-in">
+如何测试前端可视化产品？
+</large>
+</div>
+
+</section>
+
+</section>
+
+
+
+
 <section>
 
 <section markdown="1">
@@ -239,24 +282,6 @@ module.exports = {
 <section>
 
 <section markdown="1">
-## [ECharts](http://echarts.baidu.com/)
-
-- 一个纯 Javascript 的图表库
-- 兼容主流浏览器，移动友好
-- 底层依赖轻量级的 Canvas 类库 [ZRender](https://github.com/ecomfe/zrender)
-- 提供直观、生动、可交互，可高度个性化定制的**数据可视化图表**
-
-<div id="echarts-intro" class="echarts"></div>
-
-</section>
-
-</section>
-
-
-
-<section>
-
-<section markdown="1">
 
 ## 对 ECharts 做测试
 
@@ -264,7 +289,7 @@ module.exports = {
 
 **Jasmine 单元测试**
 
-例：链表类 `List`
+例：线性数据管理模块 `List`
 
 ~~~
 describe('List', function () {
@@ -284,6 +309,10 @@ describe('List', function () {
     });
 });
 ~~~
+
+<div class="fragment fade-in" markdown="1">
+如何测试渲染相关部分？
+</div>
 
 </section>
 
@@ -323,6 +352,8 @@ chart.setOption({
 
 #### **半自动测试**
 
+如何测试？
+
 <div class="fragment fade-in" markdown="1">
 - 测试不同配置项设置下的渲染一致性
   - 期望相同：如设置等于默认值的字体颜色，期望与默认情况相同
@@ -345,7 +376,7 @@ chart.setOption({
 
 <section markdown="1">
 
-## 如何比较 Canvas
+## 如何比较 Canvas？
 
 - 使用 `canvas.toDataURL()` 比较 **Canvas 图像**是否一致
 - 使用 [Canteen](https://github.com/platfora/Canteen) 比较 **Canvas 操作**是否一致
@@ -355,6 +386,7 @@ Canvas 操作相同，渲染出的图像一定相同，反之则不成立
 </div>
 
 <div class="fragment fade-in">
+<p class="center">对于同一个底层绘图环境</p>
 <p class="center lg-mg"><large>操作一致是图像一致的充分非必要条件</large></p>
 </div>
 
@@ -615,7 +647,7 @@ var testCase = {
 
 window.onload = function() {
     Reveal.addEventListener( 'slidechanged', function( event ) {
-        if (event.indexh === 3 && event.indexv === 0) {
+        if (event.indexh === 2 && event.indexv === 0) {
             setEChart();
         }
     });
