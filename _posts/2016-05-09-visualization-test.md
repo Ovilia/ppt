@@ -33,17 +33,12 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
     <div><a href="http://zhangwenli.com">zhangwenli.com</a></div>
 </div>
 
-
-<div class="fragment fade-in" markdown="1">
 ### 个人经历
 
 2016.4 至今：开源图表库 [ECharts](http://echarts.baidu.com) **@百度**
 
 2009-2016：本科+硕士 **@上海交通大学** 软件学院，数字艺术媒体实验室
-</div>
 
-
-<div class="fragment fade-in" markdown="1">
 ### 技术作品
 
 - [《Three.js 入门指南》](http://www.ituring.com.cn/book/1272)**@图灵社区**
@@ -51,8 +46,6 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 - [jWebAudio](http://01org.github.io/jWebAudio/)：基于 Web Audio 的轻便音频库
 
 *更多作品参见 [github.com/Ovilia](http://github.com/Ovilia)*
-
-</div>
 
 </section>
 
@@ -79,9 +72,9 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 
 <section markdown="1">
 
-## 为 ECharts 做测试
+## 测试渲染相关部分
 
-### 测试渲染相关部分的目标
+### 目标
 
 <div class="fragment fade-in" markdown="1">
 - 像素级精确测试渲染结果
@@ -89,6 +82,17 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 <div class="fragment fade-in" markdown="1">
 - 尽可能自动化测试
 </div>
+
+<div class="fragment fade-in" markdown="1">
+### 问题
+- 如何描述测试用例的预期表现？
+- 如何保证版本间渲染效果的一致性？
+- 如何快速定位到 bug？
+- 如何测试不同设备的表现？
+- ……
+</div>
+
+
 
 <div class="center">
 <large class="fragment fade-in">
@@ -143,15 +147,19 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 
 <div class="fragment fade-in" markdown="1">
 - *行为驱动*（*Behavior-Driven*）的测试框架
-- 引入*测试套件*（*Test Suite*）概念
-- 语法更自然
 - 支持异步测试
+</div>
+
+<div class="fragment fade-in" markdown="1">
+#### TDD vs. BDD
+- TDD（Test-Driven Development）测试驱动开发
+- BDD（Behavior-Driven Development）测试驱动开发
 </div>
 
 ### [Mocha](https://mochajs.org/)
 
 <div class="fragment fade-in" markdown="1">
-- 和 Jasmine 相似度极高
+- BDD，语法和 Jasmine 相似度极高
 - 支持更多插件，如*断言*（*Assertion*）库 [Chai](http://chaijs.com/)
 </div>
 
@@ -164,7 +172,7 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 ## 大同小异的语法
 
 ~~~
-// jUnit
+// QUnit
 test("pow(2, 2) should return 4", function(){
     equal(math.pow(2, 2), 4, "result was " + result);
 });
@@ -202,7 +210,7 @@ describe("pow", function(){
 
 ## 用户界面相关测试
 
-- 购物车总价是否等于各个商品之和？
+- 按钮在屏幕的显示位置是否正确？
 - 按钮在某个时刻是否是禁止状态？
 - 在某个点击事件后，浏览器的标题是否符合预期？
 - ……
@@ -223,7 +231,7 @@ describe("pow", function(){
 
 ~~~
 module.exports = {
-  'Demo test Google': function (client) {
+  'Demo test Google' : function (client) {
     client
       .url('http://www.google.com')
       .waitForElementVisible('body', 1000)
@@ -382,11 +390,10 @@ chart.setOption({
 - 使用 [Canteen](https://github.com/platfora/Canteen) 比较 **Canvas 操作**是否一致
 
 <div class="fragment fade-in">
-Canvas 操作相同，渲染出的图像一定相同，反之则不成立
+对于同一个底层绘图环境，Canvas 操作相同，渲染出的图像一定相同，反之则不成立
 </div>
 
 <div class="fragment fade-in">
-<p class="center">对于同一个底层绘图环境</p>
 <p class="center lg-mg"><large>操作一致是图像一致的充分非必要条件</large></p>
 </div>
 
@@ -399,6 +406,27 @@ Canvas 操作相同，渲染出的图像一定相同，反之则不成立
 ### 比较 Canvas 操作
 更严格的测试，发现潜在错误
 </div>
+
+</section>
+
+
+
+<section markdown="1">
+
+## Canvas Diff
+
+<table>
+  <tr>
+    <td><img src="{{ site.url }}/img/posts/2016-05-09-visualization-test-03.png" class="with-bg" /></td>
+    <td><img src="{{ site.url }}/img/posts/2016-05-09-visualization-test-04.png" class="with-bg" /></td>
+    <td><img src="{{ site.url }}/img/posts/2016-05-09-visualization-test-05.png" class="with-bg" /></td>
+  </tr>
+  <tr>
+    <td class="center">Canvas 1</td>
+    <td class="center">Canvas 2</td>
+    <td class="center">Canvas Diff</td>
+  </tr>
+</table>
 
 </section>
 
@@ -634,6 +662,18 @@ var testCase = {
 <section markdown="1">
 
 {% include author.html %}
+
+</section>
+
+
+
+
+
+<section markdown="1">
+
+## 调研问卷
+
+<p><img src="{{ site.url }}/img/posts/2016-05-09-visualization-test-02.png" /></p>
 
 </section>
 
