@@ -478,7 +478,7 @@ var optionCompare = function(isExpectEqual, title, option1, option2) {
         compare1 = img1;
         compare2 = img2;
       } else if (STRATEGY === 'stack') {
-        compare1 = ctx1.hash()
+        compare1 = ctx1.hash();
         compare2 = ctx2.hash();
       }
 
