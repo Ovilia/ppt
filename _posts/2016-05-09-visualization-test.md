@@ -153,7 +153,7 @@ fullpage: <svg version="1.1" baseProfile="full" width="400" height="400" xmlns="
 <div class="fragment fade-in" markdown="1">
 #### TDD vs. BDD
 - TDD（Test-Driven Development）测试驱动开发
-- BDD（Behavior-Driven Development）测试驱动开发
+- BDD（Behavior-Driven Development）行为驱动开发
 </div>
 
 ### [Mocha](https://mochajs.org/)
