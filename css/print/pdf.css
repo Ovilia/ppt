@@ -21,6 +21,7 @@ body {
 	padding: 0;
 	float: none !important;
 	overflow: visible;
+	background: #2C3E50;
 }
 
 html {
@@ -155,3 +156,6 @@ ul, ol, div, p {
 	z-index: 1;
 }
 
+.reveal .home-section h1 {
+	margin-top: 250px;
+}
