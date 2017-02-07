@@ -32,6 +32,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  margin: 1rem 0;
+}
+
 strong {
   color: $clr-thirdary;
 }
@@ -56,7 +60,17 @@ large {
 }
 
 .lg-mg {
-  margin: 40px 0;
+  margin: 40px 0 !important;
+}
+
+
+
+.secondary {
+  color: $clr-secondary !important;
+}
+
+.thirdary {
+  color: $clr-thirdary !important;
 }
 
 
